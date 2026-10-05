@@ -1,0 +1,649 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>3D Masterplan</title>
+<style>
+  :root{
+    --sand:#ede6d8;
+    --ink:#2b2f28;
+    --card-bg:rgba(20,24,18,0.86);
+    --card-border:rgba(255,255,255,0.14);
+    --accent:#c98a53;
+  }
+  *{box-sizing:border-box;}
+  html,body{
+    margin:0;padding:0;width:100%;height:100%;overflow:hidden;
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    background:#12160f;
+  }
+  #app{
+    position:relative;
+    width:100%;
+    height:100%;
+    display:flex;
+    flex-direction:column;
+  }
+
+  /* ---------- Browser chrome ---------- */
+  .browser-chrome{
+    flex:0 0 auto;
+    background:#1d2118;
+    display:flex;
+    flex-direction:column;
+    border-bottom:1px solid rgba(255,255,255,0.06);
+  }
+  .tab-row{
+    display:flex;
+    align-items:flex-end;
+    padding:6px 8px 0 8px;
+    gap:4px;
+  }
+
+  /* ---------- Scene ---------- */
+  #scene-wrap{
+    position:relative;
+    flex:1 1 auto;
+    min-height:0;
+  }
+  #scene-container{position:absolute;inset:0;}
+  canvas{display:block;}
+
+  /* ---------- Compass ---------- */
+  .compass{
+    position:absolute;
+    top:22px;right:22px;
+    width:58px;height:58px;
+    border-radius:50%;
+    background:rgba(20,24,18,0.7);
+    border:1px solid var(--card-border);
+    display:flex;align-items:center;justify-content:center;
+    backdrop-filter:blur(6px);
+  }
+  .compass svg{width:30px;height:30px;transition:transform 0.15s linear;}
+
+  /* ---------- Photo preview panel ---------- */
+  .photo-panel{
+    position:absolute;
+    top:22px;left:22px;
+    width:190px;
+    background:var(--card-bg);
+    border:1px solid var(--card-border);
+    border-radius:2px;
+    overflow:hidden;
+    color:#f4f1e9;
+    backdrop-filter:blur(6px);
+    z-index: 10;
+  }
+  .photo-panel img{
+    width:100%;
+    height:120px;
+    object-fit: cover;
+    display:block;
+  }
+  .photo-panel .cap{
+    padding:10px 12px;
+    font-size:11px;
+    letter-spacing:0.5px;
+    color:#c8cdbf;
+  }
+  .photo-panel .cap b{display:block;color:#f4f1e9;font-size:12px;margin-bottom:2px;}
+
+  /* ---------- Day/Dusk/Night toggle ---------- */
+  .time-toggle{
+    position:absolute;
+    bottom:26px;left:50%;
+    transform:translateX(-50%);
+    display:flex;
+    background:rgba(20,24,18,0.75);
+    border:1px solid var(--card-border);
+    border-radius:22px;
+    padding:4px;
+    backdrop-filter:blur(6px);
+    z-index: 10;
+  }
+  .time-toggle button{
+    appearance:none;border:none;background:transparent;
+    color:#c8cdbf;
+    font-size:11px;
+    letter-spacing:1.5px;
+    padding:9px 22px;
+    border-radius:18px;
+    cursor:pointer;
+    font-family:inherit;
+    transition:background 0.2s, color 0.2s;
+  }
+  .time-toggle button.active{
+    background:#f4f1e9;
+    color:#1d2118;
+  }
+
+  /* ---------- Legend ---------- */
+  .legend{
+    position:absolute;
+    bottom:26px;left:22px;
+    background:var(--card-bg);
+    border:1px solid var(--card-border);
+    border-radius:2px;
+    padding:12px 16px;
+    color:#e9ece0;
+    font-size:11px;
+    backdrop-filter:blur(6px);
+    z-index: 10;
+  }
+  .legend-row{display:flex;align-items:center;gap:8px;margin:4px 0;}
+  .legend-swatch{width:10px;height:10px;border-radius:2px;flex:0 0 auto;}
+
+  /* ---------- Tooltip ---------- */
+  #tooltip{
+    position:absolute;
+    pointer-events:none;
+    background:rgba(20,24,18,0.92);
+    border:1px solid var(--card-border);
+    color:#f4f1e9;
+    padding:8px 14px;
+    border-radius:2px;
+    font-size:12px;
+    letter-spacing:0.4px;
+    display:none;
+    transform:translate(-50%,-125%);
+    white-space:nowrap;
+    z-index: 20;
+  }
+  #tooltip .t-label{font-weight:600;}
+  #tooltip .t-sub{color:#c8cdbf;font-size:10.5px;font-style:italic;margin-top:2px;}
+
+  @media (max-width:720px){
+    .photo-panel{display:none;}
+    .legend{display:none;}
+  }
+</style>
+</head>
+<body>
+<div id="app">
+
+  <div id="scene-wrap">
+    <div id="scene-container"></div>
+
+    <div class="photo-panel">
+      <img src="{% static 'images/plan3d.png' %}" alt="plan3d">
+      <div class="cap"><b>Aerial Preview</b></div>
+    </div>
+
+    <div class="compass">
+      <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="20" cy="20" r="18" fill="none" stroke="#556149" stroke-width="1"/>
+        <polygon points="20,4 24,20 20,18 16,20" fill="#c98a53"/>
+        <polygon points="20,36 24,20 20,22 16,20" fill="#cfd3c8"/>
+        <text x="20" y="12" text-anchor="middle" font-size="6" fill="#f4f1e9" font-family="Arial">N</text>
+      </svg>
+    </div>
+
+    <div class="legend">
+      <div class="legend-row"><span class="legend-swatch" style="background:#2f7a4f"></span>Typology C — Villa</div>
+      <div class="legend-row"><span class="legend-swatch" style="background:#4f9a4e"></span>Typology B — Villa</div>
+      <div class="legend-row"><span class="legend-swatch" style="background:#8fbf5e"></span>Typology A — Villa</div>
+      <div class="legend-row"><span class="legend-swatch" style="background:#7a9e5a"></span>Custom Lot</div>
+    </div>
+
+    <div class="time-toggle">
+      <button data-mode="day" class="active">DAY</button>
+      <button data-mode="dusk">DUSK</button>
+      <button data-mode="night">NIGHT</button>
+    </div>
+
+    <div id="tooltip"><div class="t-label"></div><div class="t-sub"></div></div>
+  </div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script>
+(function(){
+
+  const TYPES = {
+    C: { roof:0x2f7a4f, wall:0xfaf1de, w:11, d:13, h:7,  tiers:2, label:'Typology C', sub:'Signature Villa' },
+    B: { roof:0x4f9a4e, wall:0xf7ecd6, w:8.5, d:10, h:6, tiers:2, label:'Typology B', sub:'Standard Villa' },
+    A: { roof:0x8fbf5e, wall:0xf5ecd8, w:6.5, d:7.5, h:5, tiers:1, label:'Typology A', sub:'Compact Villa' },
+    N: { roof:0x7a9e5a, wall:0xf0e5cd, w:6, d:6.5, h:4.5, tiers:1, label:'Custom Lot', sub:'Available Plot' },
+    AMENITY: { roof:0x5c9c47, wall:0xfaf3e2, w:20, d:11, h:6.5, tiers:1, label:'Clubhouse', sub:'Community Center' }
+  };
+
+  const LAYOUT = [
+    { id:'C-01', type:'C', x:-66, z:-92 },
+    { id:'C-02', type:'C', x:-44, z:-92 },
+    { id:'C-03', type:'C', x:-22, z:-92 },
+    { id:'C-04', type:'C', x:  0, z:-92 },
+    { id:'C-05', type:'C', x: 22, z:-92 },
+    { id:'C-06', type:'C', x: 44, z:-92 },
+    { id:'C-07', type:'C', x: 66, z:-92 },
+
+    { id:'12',   type:'N', x:-70, z:-72 },
+    { id:'A-01', type:'A', x:-50, z:-72 },
+    { id:'A-02', type:'A', x:-30, z:-72 },
+    { id:'18',   type:'N', x:-10, z:-72 },
+    { id:'A-03', type:'A', x: 10, z:-72 },
+    { id:'A-04', type:'A', x: 30, z:-72 },
+    { id:'A-05', type:'A', x: 50, z:-72 },
+    { id:'A-06', type:'A', x: 70, z:-72 },
+
+    { id:'11',   type:'N', x:-76, z:-48 },
+    { id:'15',   type:'N', x:-56, z:-48 },
+    { id:'17',   type:'N', x:-36, z:-48 },
+    { id:'B-01', type:'B', x:-15, z:-49 },
+
+    { id:'10',   type:'N', x:-79, z:-29 },
+    { id:'08',   type:'N', x:-61, z:-29 },
+    { id:'06',   type:'N', x:-43, z:-29 },
+    { id:'04',   type:'N', x:-25, z:-29, custom:true },
+    { id:'03',   type:'N', x: -8, z:-27 },
+
+    { id:'CLB',  type:'AMENITY', x:56, z:-46 },
+    { id:'B-02', type:'B', x:28, z:-42 },
+    { id:'B-03', type:'B', x:30, z:-24 },
+    { id:'A-07', type:'A', x:58, z:-15 },
+    { id:'A-08', type:'A', x:72, z:-15 },
+
+    { id:'09',   type:'N', x:-80, z: 2 },
+    { id:'07',   type:'N', x:-58, z: 2 },
+    { id:'05',   type:'N', x:-40, z: 2 },
+
+    { id:'B-04', type:'B', x:-80, z: 20 },
+    { id:'B-05', type:'B', x:-53, z: 22 },
+    { id:'B-06', type:'B', x:-80, z: 37 },
+    { id:'B-07', type:'B', x:-46, z: 39 },
+  ];
+
+  const COURTS = [
+    { kind:'basketball', x:-6,  z:16, w:14, d:14 },
+    { kind:'soccer',     x:22,  z:24, w:32, d:18 },
+    { kind:'tennis',     x:50,  z:10, w:12, d:22 },
+    { kind:'tennis',     x:50,  z:33, w:12, d:22 },
+  ];
+
+  const ROADS = [
+    [-84,-98, 84,-98],
+    [-84,-98,-84, 45],
+    [ 84,-98, 84, 45],
+    [-84, 45, 84, 45],
+    [-84,-82, 84,-82],
+    [-84,-60, 84,-60],
+    [-84,-38,  0,-38],
+    [-84,-18,  0,-18],
+    [-84, 10,-20, 10],
+    [ 0,-98,  0,-18],
+    [-20,-18,-20, 45],
+    [ 40,-52, 40, 45],
+  ];
+
+  const container = document.getElementById('scene-container');
+  const scene = new THREE.Scene();
+
+  const camera = new THREE.PerspectiveCamera(42, container.clientWidth/container.clientHeight, 0.1, 2000);
+  camera.position.set(6, 100, 150);
+
+  const renderer = new THREE.WebGLRenderer({ antialias:true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(container.clientWidth, container.clientHeight);
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  container.appendChild(renderer.domElement);
+
+  const controls = new THREE.OrbitControls(camera, renderer.domElement);
+  controls.enableDamping = true;
+  controls.dampingFactor = 0.08;
+  controls.target.set(0, 4, -20);
+  controls.minDistance = 40;
+  controls.maxDistance = 260;
+  controls.maxPolarAngle = Math.PI * 0.49;
+  controls.update();
+
+  const hemi = new THREE.HemisphereLight(0xfff6dd, 0x7fa15f, 0.65);
+  scene.add(hemi);
+
+  const sun = new THREE.DirectionalLight(0xfff0cf, 1.3);
+  sun.position.set(-60, 120, 40);
+  sun.castShadow = true;
+  sun.shadow.mapSize.set(2048, 2048);
+  sun.shadow.camera.left = -160;
+  sun.shadow.camera.right = 160;
+  sun.shadow.camera.top = 160;
+  sun.shadow.camera.bottom = -160;
+  sun.shadow.camera.far = 400;
+  sun.shadow.bias = -0.0015;
+  scene.add(sun);
+
+  const ambient = new THREE.AmbientLight(0xfff3df, 0.4);
+  scene.add(ambient);
+
+  const groundGeo = new THREE.PlaneGeometry(500, 500, 1, 1);
+  const groundMat = new THREE.MeshStandardMaterial({ color:0xa9d17c, roughness:0.95 });
+  const ground = new THREE.Mesh(groundGeo, groundMat);
+  ground.rotation.x = -Math.PI/2;
+  ground.position.y = -0.05;
+  ground.receiveShadow = true;
+  scene.add(ground);
+
+  const fieldColors = [0xb8dc7f, 0x9fca6f, 0xc4e28c, 0xa6d27a, 0xb0d885, 0xcadf8e];
+  const fieldGroup = new THREE.Group();
+  let fc = 0;
+  for(let row=0; row<4; row++){
+    for(let col=0; col<9; col++){
+      const w = 20, d = 22;
+      const px = -90 + col*20;
+      const pz = 70 + row*24;
+      const geo = new THREE.PlaneGeometry(w-1.2, d-1.2);
+      const mat = new THREE.MeshStandardMaterial({ color: fieldColors[fc % fieldColors.length], roughness:1 });
+      fc++;
+      const m = new THREE.Mesh(geo, mat);
+      m.rotation.x = -Math.PI/2;
+      m.position.set(px, 0.01, pz);
+      m.receiveShadow = true;
+      fieldGroup.add(m);
+      if(Math.random() > 0.45){
+        fieldGroup.add(makePalm(px + (Math.random()-0.5)*10, pz + (Math.random()-0.5)*12));
+      }
+    }
+  }
+  scene.add(fieldGroup);
+
+  const roadMat = new THREE.MeshStandardMaterial({ color:0xf1ede1, roughness:0.9 });
+  const roadGroup = new THREE.Group();
+  ROADS.forEach(([x1,z1,x2,z2]) => {
+    const dx = x2-x1, dz = z2-z1;
+    const len = Math.sqrt(dx*dx+dz*dz);
+    const geo = new THREE.BoxGeometry(len, 0.15, 3.2);
+    const mesh = new THREE.Mesh(geo, roadMat);
+    mesh.position.set((x1+x2)/2, 0.03, (z1+z2)/2);
+    mesh.rotation.y = -Math.atan2(dz, dx);
+    mesh.receiveShadow = true;
+    roadGroup.add(mesh);
+  });
+  scene.add(roadGroup);
+
+  function makeTree(x, z, scale=1){
+    const g = new THREE.Group();
+    const trunkMat = new THREE.MeshStandardMaterial({ color:0x6b5a42, roughness:1 });
+    const trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.24, 1.6, 6), trunkMat);
+    trunk.position.y = 0.8;
+    g.add(trunk);
+    const canopyPalette = [0x5c9a4a, 0x6fae52, 0x4f8f42, 0x7cb85f];
+    const canopyMat = new THREE.MeshStandardMaterial({ color: canopyPalette[Math.floor(Math.random()*canopyPalette.length)], roughness:0.9 });
+    const canopy = new THREE.Mesh(new THREE.SphereGeometry(1.3, 6, 5), canopyMat);
+    canopy.position.y = 2.0;
+    canopy.scale.set(1, 0.85, 1);
+    g.add(canopy);
+    g.traverse(o => { if(o.isMesh){ o.castShadow = true; o.receiveShadow = true; }});
+    g.position.set(x, 0, z);
+    g.scale.setScalar(scale * (0.8 + Math.random()*0.5));
+    g.rotation.y = Math.random()*Math.PI*2;
+    return g;
+  }
+
+  function makePalm(x, z){
+    const g = new THREE.Group();
+    const trunkMat = new THREE.MeshStandardMaterial({ color:0x8a7454, roughness:1 });
+    const trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.2, 2.6, 5), trunkMat);
+    trunk.position.y = 1.3;
+    trunk.rotation.z = (Math.random()-0.5)*0.15;
+    g.add(trunk);
+    const frondMat = new THREE.MeshStandardMaterial({ color:0x4f9a49, roughness:0.9 });
+    for(let i=0;i<5;i++){
+      const frond = new THREE.Mesh(new THREE.ConeGeometry(0.5, 1.8, 4), frondMat);
+      frond.position.y = 2.6;
+      frond.rotation.z = Math.PI/2.2;
+      frond.rotation.y = (i/5)*Math.PI*2;
+      frond.position.x = Math.cos((i/5)*Math.PI*2)*0.5;
+      frond.position.z = Math.sin((i/5)*Math.PI*2)*0.5;
+      g.add(frond);
+    }
+    g.traverse(o => { if(o.isMesh){ o.castShadow = true; }});
+    g.position.set(x, 0, z);
+    return g;
+  }
+
+  const treeGroup = new THREE.Group();
+  for(let i=0;i<220;i++){
+    const angle = Math.random()*Math.PI*2;
+    const radius = 95 + Math.random()*55;
+    const x = Math.cos(angle)*radius;
+    const z = -30 + Math.sin(angle)*radius*0.85;
+    if(z > 55) continue;
+    treeGroup.add(makeTree(x, z, 1.1));
+  }
+  for(let i=0;i<40;i++){
+    treeGroup.add(makeTree(-95 + Math.random()*190, -100 + Math.random()*50, 0.85));
+  }
+  scene.add(treeGroup);
+
+  const raycastTargets = [];
+  const windowMaterials = [];
+
+  function makeWindowStrip(w, h){
+    const mat = new THREE.MeshStandardMaterial({
+      color:0x1a1d17, emissive:0xffdca0, emissiveIntensity:0, roughness:0.4
+    });
+    windowMaterials.push(mat);
+    const geo = new THREE.PlaneGeometry(w, h);
+    return new THREE.Mesh(geo, mat);
+  }
+
+  function createVilla(def){
+    const spec = TYPES[def.type];
+    const g = new THREE.Group();
+
+    const wallMat = new THREE.MeshStandardMaterial({ color: spec.wall, roughness:0.85 });
+    const roofMat = new THREE.MeshStandardMaterial({ color: spec.roof, roughness:0.6 });
+
+    const baseH = spec.h * (spec.tiers === 2 ? 0.58 : 1);
+    const base = new THREE.Mesh(new THREE.BoxGeometry(spec.w, baseH, spec.d), wallMat);
+    base.position.y = baseH/2;
+    base.castShadow = true; base.receiveShadow = true;
+    g.add(base);
+
+    if(spec.tiers === 2){
+      const upperH = spec.h - baseH;
+      const upper = new THREE.Mesh(new THREE.BoxGeometry(spec.w*0.72, upperH, spec.d*0.68), wallMat);
+      upper.position.y = baseH + upperH/2;
+      upper.position.z = -spec.d*0.08;
+      upper.castShadow = true; upper.receiveShadow = true;
+      g.add(upper);
+
+      const roof = new THREE.Mesh(new THREE.BoxGeometry(spec.w*0.78, spec.h*0.09, spec.d*0.74), roofMat);
+      roof.position.y = baseH + upperH + spec.h*0.045;
+      roof.position.z = -spec.d*0.08;
+      roof.castShadow = true;
+      g.add(roof);
+
+      const win = makeWindowStrip(spec.w*0.6, upperH*0.5);
+      win.position.set(0, baseH + upperH*0.5, -spec.d*0.08 + spec.d*0.34 + 0.02);
+      g.add(win);
+    } else {
+      const roof = new THREE.Mesh(new THREE.BoxGeometry(spec.w*1.06, spec.h*0.12, spec.d*1.06), roofMat);
+      roof.position.y = baseH + spec.h*0.06;
+      roof.castShadow = true;
+      g.add(roof);
+    }
+
+    const win2 = makeWindowStrip(spec.w*0.7, baseH*0.45);
+    win2.position.set(0, baseH*0.5, spec.d/2 + 0.02);
+    g.add(win2);
+
+    if(def.type === 'C'){
+      const poolMat = new THREE.MeshStandardMaterial({ color:0x35b8d6, roughness:0.12, metalness:0.15 });
+      const pool = new THREE.Mesh(new THREE.PlaneGeometry(spec.w*0.55, spec.d*0.3), poolMat);
+      pool.rotation.x = -Math.PI/2;
+      pool.position.set(0, 0.02, spec.d/2 + 2.2);
+      pool.receiveShadow = true;
+      g.add(pool);
+    }
+
+    if(def.custom){
+      const edges = new THREE.LineSegments(
+        new THREE.EdgesGeometry(base.geometry),
+        new THREE.LineBasicMaterial({ color:0xffffff })
+      );
+      edges.position.copy(base.position);
+      g.add(edges);
+    }
+
+    g.position.set(def.x, 0, def.z);
+    if(def.rot) g.rotation.y = def.rot;
+
+    g.userData = {
+      label: `${spec.label} ${def.id.match(/^\d+$/) ? '— Lot ' + def.id : '— ' + def.id}`,
+      sub: spec.sub
+    };
+
+    g.traverse(o => { if(o.isMesh) raycastTargets.push(o); });
+    g.userData.__root = true;
+    return g;
+  }
+
+  const buildingGroup = new THREE.Group();
+  LAYOUT.forEach(def => buildingGroup.add(createVilla(def)));
+  scene.add(buildingGroup);
+
+  function lineMat(){ return new THREE.MeshBasicMaterial({ color:0xffffff }); }
+
+  function addLine(group, x, z, w, d){
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(w, d), lineMat());
+    m.rotation.x = -Math.PI/2;
+    m.position.set(x, 0.03, z);
+    group.add(m);
+  }
+
+  const courtGroup = new THREE.Group();
+  COURTS.forEach(c => {
+    const g = new THREE.Group();
+    let surfaceColor = 0x8fbf5e;
+    if(c.kind === 'basketball') surfaceColor = 0xb08a4a;
+    if(c.kind === 'tennis') surfaceColor = 0x3f9c6a;
+
+    const surf = new THREE.Mesh(new THREE.PlaneGeometry(c.w, c.d), new THREE.MeshStandardMaterial({ color:surfaceColor, roughness:0.95 }));
+    surf.rotation.x = -Math.PI/2;
+    surf.position.set(c.x, 0.02, c.z);
+    surf.receiveShadow = true;
+    g.add(surf);
+
+    addLine(g, c.x, c.z - c.d/2 + 0.05, c.w, 0.1);
+    addLine(g, c.x, c.z + c.d/2 - 0.05, c.w, 0.1);
+    addLine(g, c.x - c.w/2 + 0.05, c.z, 0.1, c.d);
+    addLine(g, c.x + c.w/2 - 0.05, c.z, 0.1, c.d);
+
+    if(c.kind === 'soccer'){
+      addLine(g, c.x, c.z, c.w*0.25, 0.08);
+      addLine(g, c.x, c.z, 0.08, c.d*0.9);
+    }
+    if(c.kind === 'tennis'){
+      addLine(g, c.x, c.z, c.w, 0.08);
+    }
+    courtGroup.add(g);
+  });
+  scene.add(courtGroup);
+
+  const PRESETS = {
+    day: {
+      sky:0x9fd4ee, fog:0xb9e29f, fogNear:160, fogFar:440,
+      hemiSky:0xfff6dd, hemiGround:0x6f9c4f, hemiI:0.7,
+      sunColor:0xffe6a8, sunI:1.35, sunPos:[-70,110,50],
+      ambI:0.42, windowI:0
+    },
+    dusk: {
+      sky:0xe8b48a, fog:0xdba087, fogNear:100, fogFar:360,
+      hemiSky:0xf3a97a, hemiGround:0x6c5a4a, hemiI:0.4,
+      sunColor:0xffa15c, sunI:0.85, sunPos:[-110,35,60],
+      ambI:0.28, windowI:0.7
+    },
+    night: {
+      sky:0x161c33, fog:0x161c33, fogNear:80, fogFar:300,
+      hemiSky:0x2b3a5c, hemiGround:0x11150f, hemiI:0.22,
+      sunColor:0x8fa3d9, sunI:0.22, sunPos:[40,90,-30],
+      ambI:0.15, windowI:1.3
+    }
+  };
+
+  function applyPreset(name){
+    const p = PRESETS[name];
+    scene.background = new THREE.Color(p.sky);
+    scene.fog = new THREE.Fog(p.fog, p.fogNear, p.fogFar);
+    hemi.color.set(p.hemiSky);
+    hemi.groundColor.set(p.hemiGround);
+    hemi.intensity = p.hemiI;
+    sun.color.set(p.sunColor);
+    sun.intensity = p.sunI;
+    sun.position.set(...p.sunPos);
+    ambient.intensity = p.ambI;
+    windowMaterials.forEach(m => m.emissiveIntensity = p.windowI);
+
+    document.querySelectorAll('.time-toggle button').forEach(b => {
+      b.classList.toggle('active', b.dataset.mode === name);
+    });
+  }
+  applyPreset('day');
+
+  document.querySelectorAll('.time-toggle button').forEach(btn => {
+    btn.addEventListener('click', () => applyPreset(btn.dataset.mode));
+  });
+
+  const raycaster = new THREE.Raycaster();
+  const pointer = new THREE.Vector2();
+  const tooltip = document.getElementById('tooltip');
+  const tLabel = tooltip.querySelector('.t-label');
+  const tSub = tooltip.querySelector('.t-sub');
+  const sceneWrap = document.getElementById('scene-wrap');
+
+  function findVillaRoot(obj){
+    let o = obj;
+    while(o && !o.userData.__root){ o = o.parent; }
+    return o;
+  }
+
+  window.addEventListener('pointermove', (e) => {
+    const rect = renderer.domElement.getBoundingClientRect();
+    pointer.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+    pointer.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+
+    raycaster.setFromCamera(pointer, camera);
+    const hits = raycaster.intersectObjects(raycastTargets, false);
+
+    if(hits.length){
+      const root = findVillaRoot(hits[0].object);
+      if(root){
+        tLabel.textContent = root.userData.label;
+        tSub.textContent = root.userData.sub;
+        tooltip.style.display = 'block';
+        tooltip.style.left = (e.clientX - rect.left) + 'px';
+        tooltip.style.top = (e.clientY - rect.top) + 'px';
+        renderer.domElement.style.cursor = 'pointer';
+        return;
+      }
+    }
+    tooltip.style.display = 'none';
+    renderer.domElement.style.cursor = 'grab';
+  });
+
+  sceneWrap.addEventListener('pointerleave', () => { tooltip.style.display = 'none'; });
+
+  function onResize(){
+    const w = container.clientWidth, h = container.clientHeight;
+    camera.aspect = w/h;
+    camera.updateProjectionMatrix();
+    renderer.setSize(w, h);
+  }
+  window.addEventListener('resize', onResize);
+
+  function animate(){
+    requestAnimationFrame(animate);
+    controls.update();
+    renderer.render(scene, camera);
+  }
+  animate();
+
+})();
+</script>
+</body>
+</html>

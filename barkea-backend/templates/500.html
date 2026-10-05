@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}500 - Server Error | Barkea Resort{% endblock %}
+
+{% block content %}
+<div class="error-page-wrapper">
+    <div class="error-card">
+        <h1 class="error-code error-500">500</h1>
+        <h2>Server Error</h2>
+        <p>Something went wrong on our system. We are working to fix it as soon as possible.</p>
+        <a href="{% url 'home' %}" class="btn-error-home">Back to Home</a>
+    </div>
+</div>
+{% endblock %}

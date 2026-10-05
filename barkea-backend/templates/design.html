@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Design & Architecture - Resort{% endblock %}
+
+{% block content %}
+    <section class="intro-quote-section">
+        <div class="container">
+            <div class="quote-box">
+                <p class="quote-text">Architecture should speak of its time and place, but yearn for timelessness.</p>
+                <span class="quote-author">— Frank Gehry</span>
+            </div>
+        </div>
+    </section>
+    <section class="masterplan-section">
+        <div class="container">
+            
+            <div class="section-header">
+                <h2>ARCHITECTURE & MASTERPLAN</h2>
+                <p class="section-subtitle">A HARMONIOUS BLEND OF FORM, FUNCTION, AND NATURE.</p>
+            </div>
+            <div class="masterplan-grid">
+                
+                <div class="masterplan-text">
+                    <span class="small-tag">MASTERPLAN CONCEPT</span>
+                    <h3>Integrated Terrain & Smart Zoning</h3>
+                    <p>
+                        The architectural masterplan is carefully designed to follow the natural topography of the land. 
+                        Every villa position is optimized to guarantee maximum privacy, unobstructed panoramic views, 
+                        and seamless connection with lush green environments and recreational zones.
+                    </p>
+                    
+                    <ul class="feature-list">
+                        <li>Optimal sun orientation for every residence</li>
+                        <li>Private access roads and dedicated parking zones</li>
+                        <li>Extensive green corridors and community spaces</li>
+                    </ul>
+                </div>
+
+                <div class="masterplan-image">
+                    <img src="{% static 'images/plani.png' %}" alt="Architecture and Masterplan Map">
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <section class="villas-section">
+        <div class="container">
+            
+            <div class="section-header">
+                <h2>VILLA FLOOR PLANS</h2>
+                <p class="section-subtitle">EXPLORE THE INTERNAL CONFIGURATIONS AND LAYOUTS.</p>
+            </div>
+
+            <!-- Butonat e vilave a,b,c-->
+            <div class="tab-buttons">
+                <button class="tab-btn active" onclick="openVilla(event, 'villaA')">Villa A</button>
+                <button class="tab-btn" onclick="openVilla(event, 'villaB')">Villa B</button>
+                <button class="tab-btn" onclick="openVilla(event, 'villaC')">Villa C</button>
+            </div>
+
+            <!-- Permbajtja e tyre -->
+            <div id="villaA" class="tab-content active-content">
+                <div class="masterplan-grid">
+                    <div class="masterplan-text">
+                        <span class="small-tag">TYPOLOGY A</span>
+                        <h3>Villas A (206m² - 277m²)</h3>
+                        <p>
+                            Divided into two main typologies (Typology 1 across 3 floors and Typology 2 across 2 floors), 
+                            these residences offer thoughtfully organized living spaces featuring modern details and private zones.
+                        </p>
+                        <ul class="feature-list">
+                            <li>Floor -1: Summer lounge, laundry, storage, and pool access.</li>
+                            <li>Ground Floor: Main living area, open kitchen, and guest restroom.</li>
+                            <li>First Floor: 3 bedrooms and dedicated bathrooms.</li>
+                        </ul>
+                    </div>
+                    <div class="masterplan-image">
+                    <img src="{% static 'images/vila-a-plan.png' %}" alt="Villa A Plan">
+                    </div>
+                </div>
+            </div>
+
+            <div id="villaB" class="tab-content">
+                <div class="masterplan-grid">
+                    <div class="masterplan-text">
+                        <span class="small-tag">TYPOLOGY B</span>
+                        <h3>Villas B (426m² - 475m²)</h3>
+                        <p>
+                            Villa B provides expansive, luxurious layouts spanning 3 or 4 levels, featuring technical rooms, 
+                            grand dining areas, and summer lounges connected directly to the private pool deck.
+                        </p>
+                        <ul class="feature-list">
+                            <li>Spacious living and kitchen area up to 94m².</li>
+                            <li>South-west oriented balconies with panoramic views.</li>
+                            <li>Luxurious master suite with walk-in wardrobe.</li>
+                        </ul>
+                    </div>
+                    <div class="masterplan-image">
+                       <img src="{% static 'images/vila-b-plan.png' %}" alt="Villa B Plan">
+                    </div>
+                </div>
+            </div>
+
+            <div id="villaC" class="tab-content">
+                <div class="masterplan-grid">
+                    <div class="masterplan-text">
+                        <span class="small-tag">TYPOLOGY C</span>
+                        <h3>Villas C (From 440m²)</h3>
+                        <p>
+                            Composed of two modules (C1 + C2) spread across multi-level tiers, these exclusive villas 
+                            stand out for their grand panoramic verandas and sophisticated architectural zoning.
+                        </p>
+                        <ul class="feature-list">
+                            <li>Modules C1 and C2 with entertainment and guest areas.</li>
+                            <li>Expansive upper-floor panoramic veranda.</li>
+                            <li>Direct fluid access to outdoor landscape zones.</li>
+                        </ul>
+                    </div>
+                    <div class="masterplan-image">
+                       <img src="{% static 'images/vila-c-plan.png' %}" alt="Villa C Plan">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+{% endblock %}

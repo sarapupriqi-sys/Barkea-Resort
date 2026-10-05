@@ -1,0 +1,37 @@
+{% load static %}
+<footer class="site-footer">
+    <div class="footer-container">
+
+        <div class="footer-col">
+            <img src="{% static 'images/barkeicon.png' %}" alt="Barkea Resort logo" class="footer-logo">
+            <p class="footer-address">Residence &amp; living &mdash; Farke, Tirana</p>
+            <div class="social-icons">
+                <a href="https://wa.me/355692028516" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i class="fa-regular fa-comment"></i></a>
+                <a href="https://www.facebook.com/barkealbania/?locale=sq_AL" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+        </div>
+
+        <div class="footer-col">
+            <h3 data-i18n="footer.contact">CONTACT</h3>
+            <p><a href="mailto:barkealbania@gmail.com">barkealbania@gmail.com</a></p>
+            <p><a href="tel:+355692028516">069 202 8516</a></p>
+            <p>Lunder, Farke-Tirana</p>
+        </div>
+
+        <div class="footer-col">
+            <h3 data-i18n="footer.newsletter">NEWSLETTER</h3>
+            <ul class="footer-links">
+                <li><a href="{% static 'images/BROSHURE-BARKEA-1.pdf' %}" target="_blank" rel="noopener" download data-i18n="footer.brochure">Brochure</a></li>
+                <li><a href="{% url 'faq' %}" data-i18n="footer.faq">FAQ</a></li>
+                <li><a href="{% url 'legal' %}" data-i18n="footer.legal">Legal</a></li>
+                <li><a href="{% url 'privacy' %}" data-i18n="footer.privacy">Privacy</a></li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <span>&copy; 2026 Barkea Resort. All rights reserved. Non-contractual information.</span>
+    </div>
+</footer>

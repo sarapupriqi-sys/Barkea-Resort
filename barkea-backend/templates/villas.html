@@ -1,0 +1,182 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Villas - Barkea Complex{% endblock %}
+
+{% block extra_head %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="{% static 'images/barkeicon.png' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Cookie&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div class="villas-page">
+<section class="intro-section">
+    <div class="container">
+        <span class="intro-subtitle">A World of Your Own</span>
+        <h1 class="villas-page-title">The Villas</h1>
+        <div class="intro-wrapper">
+            <p class="intro-quote">
+                A villa at Barkea is not simply a place to stay but a world that quietly becomes your own. 
+                Indoors and outdoors flow as one, open to gentle breezes, sunlight and the rhythm of nature, 
+                with every space inviting you to slow down, settle in and truly belong. All you have to do is 
+                arrive and let the resort take care of the rest.
+            </p>
+        </div>
+        <ul class="villas-stats">
+            <li><strong>37</strong><span>Villas</span></li>
+            <li><strong>15</strong><span>Completed</span></li>
+            <li><strong>22</strong><span>In progress</span></li>
+        </ul>
+    </div>
+</section>
+  <section class="villas-series" aria-labelledby="villasSeriesTitle">
+      <div class="villas-series-inner">
+          <header class="villas-series-head">
+              <h2 id="villasSeriesTitle">Villas &amp; Categories</h2>
+              <p>Choose a series to browse its units, or explore all 37 below.</p>
+          </header>
+          <div class="villas-series-grid">
+              <article class="series-item">
+                  <span class="series-letter" aria-hidden="true">A</span>
+                  <h3>Villa A Series</h3>
+                  <dl class="series-specs">
+                      <div><dt>Interior surface</dt><dd>206 &ndash; 277 m&sup2;</dd></div>
+                      <div><dt>Land area</dt><dd>400 &ndash; 588 m&sup2;</dd></div>
+                      <div><dt>Layout</dt><dd>2 or 3 floors</dd></div>
+                  </dl>
+                  <a class="series-link" href="?type=A#villaUnits">View A1&ndash;A8</a>
+              </article>
+              <article class="series-item">
+                  <span class="series-letter" aria-hidden="true">B</span>
+                  <h3>Villa B Series</h3>
+                  <dl class="series-specs">
+                      <div><dt>Interior surface</dt><dd>426 &ndash; 475 m&sup2;</dd></div>
+                      <div><dt>Land area</dt><dd>654 &ndash; 877 m&sup2;</dd></div>
+                      <div><dt>Layout</dt><dd>3 to 4 floors</dd></div>
+                  </dl>
+                  <a class="series-link" href="?type=B#villaUnits">View B1&ndash;B7</a>
+              </article>
+              <article class="series-item">
+                  <span class="series-letter" aria-hidden="true">C</span>
+                  <h3>Villa C Series</h3>
+                  <dl class="series-specs">
+                      <div><dt>Interior surface</dt><dd>440 m&sup2;</dd></div>
+                      <div><dt>Land area</dt><dd>470 &ndash; 830 m&sup2;</dd></div>
+                      <div><dt>Layout</dt><dd>3 floors + veranda</dd></div>
+                  </dl>
+                  <a class="series-link" href="?type=C#villaUnits">View C1&ndash;C7</a>
+              </article>
+          </div>
+          <p class="series-note">Phase 1 &mdash; 15 completed villas. <a href="?status=completed#villaUnits">View completed</a></p>
+      </div>
+  </section>
+  <!-- FILTER BAR -->
+  <section class="filter-section">
+      <div class="filter-container">
+          <div class="filter-box">
+              <label>Typology</label>
+              <select id="typologyFilter">
+                  <option value="all">All Units</option>
+                  <option value="phase1">Villas</option>
+                  <option value="A">Villa A Series (A1-A8)</option>
+                  <option value="B">Villa B Series (B1-B7)</option>
+                  <option value="C">Villa C Series (C1-C7)</option>
+              </select>
+          </div>
+          <div class="filter-box">
+              <label>Status</label>
+              <select id="statusFilter">
+                  <option value="all">All Status</option>
+                  <option value="completed">Completed</option>
+                  <option value="in-progress">In Progress</option>
+                   <option value="sold-out">Sold out</option>
+              </select>
+          </div>
+          <button type="button" class="reset-filter-btn" id="resetFilterBtn">Reset filter</button>
+          <span class="filter-results-count" id="filterResultsCount" aria-live="polite">37 units found</span>
+      </div>
+  </section>
+
+  <!-- VILLA CARDS GRID -->
+  <div class="villas-main-grid" id="villaUnits">
+
+      <!-- VILAT A (A1 - A8) -->
+      <div class="barkea-card" data-type="A" data-status="in-progress" data-plan="{% static 'images/vila-a-plan.png' %}" tabindex="0" role="button"><div class="card-image-wrap"><img src="{% static 'images/progresA.png' %}" alt="Villa A1"><span class="image-tag">In Progress</span></div><div class="card-meta"><span>Villa A1 • 3 Floors • 206–277 m²</span></div><h3 class="card-title">Villa A1</h3><p class="card-desc">High-efficiency space optimization with modern minimal layouts.</p></div>
+      <div class="barkea-card" data-type="A" data-status="in-progress" data-plan="{% static 'images/vila-a-plan.png' %}" tabindex="0" role="button"><div class="card-image-wrap"><img src="{% static 'images/progresA.png' %}" alt="Villa A2"><span class="image-tag">In Progress</span></div><div class="card-meta"><span>Villa A2 • 3 Floors • 206–277 m²</span></div><h3 class="card-title">Villa A2</h3><p class="card-desc">High-efficiency space optimization with modern minimal layouts.</p></div>
+      <div class="barkea-card" data-type="A" data-status="in-progress" data-plan="{% static 'images/vila-a-plan.png' %}" tabindex="0" role="button"><div class="card-image-wrap"><img src="{% static 'images/progresA.png' %}"  alt="Villa A3"><span class="image-tag">In Progress</span></div><div class="card-meta"><span>Villa A3 • 3 Floors • 206–277 m²</span></div><h3 class="card-title">Villa A3</h3><p class="card-desc">High-efficiency space optimization with modern minimal layouts.</p></div>
+      <div class="barkea-card" data-type="A" data-status="in-progress" data-plan="{% static 'images/vila-a-plan.png' %}" tabindex="0" role="button"><div class="card-image-wrap"><img src="{% static 'images/progresA.png' %}" alt="Villa A4"><span class="image-tag">In Progress</span></div><div class="card-meta"><span>Villa A4 • 3 Floors • 206–277 m²</span></div><h3 class="card-title">Villa A4</h3><p class="card-desc">High-efficiency space optimization with modern minimal layouts.</p></div>
+      <div class="barkea-card" data-type="A" data-status="in-progress" data-plan="{% static 'images/vila-a-plan.png' %}" tabindex="0" role="button"><div class="card-image-wrap"><img src="{% static 'images/progresA.png' %}"  alt="Villa A5"><span class="image-tag">In Progress</span></div><div class="card-meta"><span>Villa A5 • 3 Floors • 206–277 m²</span></div><h3 class="card-title">Villa A5</h3><p class="card-desc">High-efficiency space optimization with modern minimal layouts.</p></div>
+      <div class="barkea-card" data-type="A" data-status="in-progress" data-plan="{% static 'images/vila-a-plan.png' %}" tabindex="0" role="button"><div class="card-image-wrap"><img src="{% static 'images/progresA.png' %}"  alt="Villa A6"><span class="image-tag">In Progress</span></div><div class="card-meta"><span>Villa A6 • 3 Floors • 206–277 m²</span></div><h3 class="card-title">Villa A6</h3><p class="card-desc">High-efficiency space optimization with modern minimal layouts.</p></div>
+      <div class="barkea-card" data-type="A" data-status="in-progress" data-plan="{% static 'images/vila-a-plan.png' %}" tabindex="0" role="button"><div class="card-image-wrap"><img src="{% static 'images/progresA.png' %}"  alt="Villa A7"><span class="image-tag">In Progress</span></div><div class="card-meta"><span>Villa A7 • 2 Floors • Open-plan</span></div><h3 class="card-title">Villa A7</h3><p class="card-desc">Optimized 2-floor structure focused on open-plan living and comfort.</p></div>
+      <div class="barkea-card" data-type="A" data-status="in-progress" data-plan="{% static 'images/vila-a-plan.png' %}" tabindex="0" role="button"><div class="card-image-wrap"><img src="{% static 'images/progresA.png' %}"  alt="Villa A8"><span class="image-tag">In Progress</span></div><div class="card-meta"><span>Villa A8 • 2 Floors • Open-plan</span></div><h3 class="card-title">Villa A8</h3><p class="card-desc">Optimized 2-floor structure focused on open-plan living and comfort.</p></div>
+
+      <!-- VILAT B (B1 - B7)-->
+      <div class="barkea-card" data-type="B" data-status="in-progress" data-plan="{% static 'images/vila-b-plan.png' %}" tabindex="0" role="button"><div class="card-image-wrap"><img src="{% static 'images/progresB.png' %}" alt="Villa B1"><span class="image-tag">In Progress</span></div><div class="card-meta"><span>Villa B1 • 3 Floors • 426–475 m²</span></div><h3 class="card-title">Villa B1</h3><p class="card-desc">Mid-to-large scale luxury unit with massive plot expansions.</p></div>
+      <div class="barkea-card" data-type="B" data-status="in-progress" data-plan="{% static 'images/vila-b-plan.png' %}" tabindex="0" role="button"><div class="card-image-wrap"><img src="{% static 'images/progresB.png' %}" alt="Villa B2"><span class="image-tag">In Progress</span></div><div class="card-meta"><span>Villa B2 • 3 Floors • 426–475 m²</span></div><h3 class="card-title">Villa B2</h3><p class="card-desc">Mid-to-large scale luxury unit with massive plot expansions.</p></div>
+      <div class="barkea-card" data-type="B" data-status="in-progress" data-plan="{% static 'images/vila-b-plan.png' %}" tabindex="0" role="button"><div class="card-image-wrap"><img src="{% static 'images/progresB.png' %}" alt="Villa B3"><span class="image-tag">In Progress</span></div><div class="card-meta"><span>Villa B3 • 3 Floors • 426–475 m²</span></div><h3 class="card-title">Villa B3</h3><p class="card-desc">Mid-to-large scale luxury unit with massive plot expansions.</p></div>
+      <div class="barkea-card" data-type="B" data-status="in-progress" data-plan="{% static 'images/vila-b-plan.png' %}" tabindex="0" role="button"><div class="card-image-wrap"><img src="{% static 'images/progresB.png' %}" alt="Villa B4"><span class="image-tag">In Progress</span></div><div class="card-meta"><span>Villa B4 • 4 Floors • Vast Interior</span></div><h3 class="card-title">Villa B4</h3><p class="card-desc">Vast interior space featuring 4 full residential floors.</p></div>
+      <div class="barkea-card" data-type="B" data-status="in-progress" data-plan="{% static 'images/vila-b-plan.png' %}" tabindex="0" role="button"><div class="card-image-wrap"><img src="{% static 'images/progresB.png' %}" alt="Villa B5"><span class="image-tag">In Progress</span></div><div class="card-meta"><span>Villa B5 • 3 Floors • 426–475 m²</span></div><h3 class="card-title">Villa B5</h3><p class="card-desc">Mid-to-large scale luxury unit with massive plot expansions.</p></div>
+      <div class="barkea-card" data-type="B" data-status="in-progress" data-plan="{% static 'images/vila-b-plan.png' %}" tabindex="0" role="button"><div class="card-image-wrap"><img src="{% static 'images/progresB.png' %}" alt="Villa B6"><span class="image-tag">In Progress</span></div><div class="card-meta"><span>Villa B6 • 4 Floors • Vast Interior</span></div><h3 class="card-title">Villa B6</h3><p class="card-desc">Vast interior space featuring 4 full residential floors.</p></div>
+      <div class="barkea-card" data-type="B" data-status="in-progress" data-plan="{% static 'images/vila-b-plan.png' %}" tabindex="0" role="button"><div class="card-image-wrap"><img src="{% static 'images/progresB.png' %}" alt="Villa B7"><span class="image-tag">In Progress</span></div><div class="card-meta"><span>Villa B7 • 3 Floors • 426–475 m²</span></div><h3 class="card-title">Villa B7</h3><p class="card-desc">Mid-to-large scale luxury unit with massive plot expansions.</p></div>
+
+      <!-- VILAT C (C1 - C7) -->
+      <div class="barkea-card" data-type="C" data-status="in-progress" data-plan="{% static 'images/vila-c-plan.png' %}" tabindex="0" role="button"><div class="card-image-wrap"><img src="{% static 'images/progresC.jpeg' %}" alt="Villa C1"><span class="image-tag">In Progress</span></div><div class="card-meta"><span>Villa C1 • 3 Floors • 440–470 m²</span></div><h3 class="card-title">Villa C1</h3><p class="card-desc">Premium panorama unit overlooking the resort.</p></div>
+      <div class="barkea-card" data-type="C" data-status="in-progress" data-plan="{% static 'images/vila-c-plan.png' %}" tabindex="0" role="button"><div class="card-image-wrap"><img src="{% static 'images/progresC.jpeg' %}" alt="Villa C2"><span class="image-tag">In Progress</span></div><div class="card-meta"><span>Villa C2 • 3 Floors + Veranda</span></div><h3 class="card-title">Villa C2</h3><p class="card-desc">Featuring massive 3rd-floor panoramic verandas.</p></div>
+      <div class="barkea-card" data-type="C" data-status="in-progress" data-plan="{% static 'images/vila-c-plan.png' %}" tabindex="0" role="button"><div class="card-image-wrap"><img src="{% static 'images/progresC.jpeg' %}" alt="Villa C3"><span class="image-tag">In Progress</span></div><div class="card-meta"><span>Villa C3 • 3 Floors • 440–470 m²</span></div><h3 class="card-title">Villa C3</h3><p class="card-desc">Premium panorama unit overlooking the resort.</p></div>
+      <div class="barkea-card" data-type="C" data-status="in-progress" data-plan="{% static 'images/vila-c-plan.png' %}" tabindex="0" role="button"><div class="card-image-wrap"><img src="{% static 'images/progresC.jpeg' %}" alt="Villa C4"><span class="image-tag">In Progress</span></div><div class="card-meta"><span>Villa C4 • 3 Floors + Veranda</span></div><h3 class="card-title">Villa C4</h3><p class="card-desc">Featuring massive 3rd-floor panoramic verandas.</p></div>
+      <div class="barkea-card" data-type="C" data-status="in-progress" data-plan="{% static 'images/vila-c-plan.png' %}" tabindex="0" role="button"><div class="card-image-wrap"><img src="{% static 'images/progresC.jpeg' %}" alt="Villa C5"><span class="image-tag">In Progress</span></div><div class="card-meta"><span>Villa C5 • 3 Floors • 440–470 m²</span></div><h3 class="card-title">Villa C5</h3><p class="card-desc">Premium panorama unit overlooking the resort.</p></div>
+      <div class="barkea-card" data-type="C" data-status="in-progress" data-plan="{% static 'images/vila-c-plan.png' %}" tabindex="0" role="button"><div class="card-image-wrap"><img src="{% static 'images/progresC.jpeg' %}" alt="Villa C6"><span class="image-tag">In Progress</span></div><div class="card-meta"><span>Villa C6 • 3 Floors + Veranda</span></div><h3 class="card-title">Villa C6</h3><p class="card-desc">Featuring massive 3rd-floor panoramic verandas.</p></div>
+      <div class="barkea-card" data-type="C" data-status="in-progress" data-plan="{% static 'images/vila-c-plan.png' %}" tabindex="0" role="button"><div class="card-image-wrap"><img src="{% static 'images/progresC.jpeg' %}" alt="Villa C7"><span class="image-tag">In Progress</span></div><div class="card-meta"><span>Villa C7 • 3 Floors • 440–470 m²</span></div><h3 class="card-title">Villa C7</h3><p class="card-desc">Premium panorama unit overlooking the resort.</p></div>
+
+      <!--  PHASE 1 (15 Vila)-->
+      <div class="barkea-card" data-type="phase1" data-status="completed" tabindex="0" role="button"><div class="card-image-wrap"><img src="{% static 'images/completed1.jpg' %}" alt="Phase 1 Unit 01"><span class="image-tag image-tag--completed">Completed</span></div><div class="card-meta"><span>Phase 1 • Unit 01 • 3 Floors + Basement</span></div><h3 class="card-title">Phase 1 - Unit 01</h3><p class="card-desc">Fully completed residential villa with deep basement level.</p></div>
+      <div class="barkea-card" data-type="phase1" data-status="completed" tabindex="0" role="button"><div class="card-image-wrap"><img src="{% static 'images/completed2.jpg' %}" alt="Phase 1 Unit 02"><span class="image-tag image-tag--completed">Completed</span></div><div class="card-meta"><span>Phase 1 • Unit 02 • 3 Floors + Basement</span></div><h3 class="card-title">Phase 1 - Unit 02</h3><p class="card-desc">Fully completed residential villa with deep basement level.</p></div>
+      <div class="barkea-card" data-type="phase1" data-status="completed" tabindex="0" role="button"><div class="card-image-wrap"><img src="{% static 'images/completed3.jpg' %}" alt="Phase 1 Unit 03"><span class="image-tag image-tag--completed">Completed</span></div><div class="card-meta"><span>Phase 1 • Unit 03 • 3 Floors + Basement</span></div><h3 class="card-title">Phase 1 - Unit 03</h3><p class="card-desc">Fully completed residential villa with deep basement level.</p></div>
+      <div class="barkea-card" data-type="phase1" data-status="completed" tabindex="0" role="button"><div class="card-image-wrap"><img src="{% static 'images/completed4.jpg' %}" alt="Phase 1 Unit 04"><span class="image-tag image-tag--completed">Completed</span></div><div class="card-meta"><span>Phase 1 • Unit 04 • 3 Floors + Basement</span></div><h3 class="card-title">Phase 1 - Unit 04</h3><p class="card-desc">Fully completed residential villa with deep basement level.</p></div>
+      <div class="barkea-card" data-type="phase1" data-status="completed" tabindex="0" role="button"><div class="card-image-wrap"><img src="{% static 'images/completed5.jpg' %}" alt="Phase 1 Unit 05"><span class="image-tag image-tag--completed">Completed</span></div><div class="card-meta"><span>Phase 1 • Unit 05 • 3 Floors + Basement</span></div><h3 class="card-title">Phase 1 - Unit 05</h3><p class="card-desc">Fully completed residential villa with deep basement level.</p></div>
+      <div class="barkea-card" data-type="phase1" data-status="completed" tabindex="0" role="button"><div class="card-image-wrap"><img src="{% static 'images/completed1.jpg' %}" alt="Phase 1 Unit 06"><span class="image-tag image-tag--completed">Completed</span></div><div class="card-meta"><span>Phase 1 • Unit 06 • 3 Floors + Basement</span></div><h3 class="card-title">Phase 1 - Unit 06</h3><p class="card-desc">Fully completed residential villa with deep basement level.</p></div>
+      <div class="barkea-card" data-type="phase1" data-status="completed" tabindex="0" role="button"><div class="card-image-wrap"><img src="{% static 'images/completed2.jpg' %}" alt="Phase 1 Unit 07"><span class="image-tag image-tag--completed">Completed</span></div><div class="card-meta"><span>Phase 1 • Unit 07 • 3 Floors + Basement</span></div><h3 class="card-title">Phase 1 - Unit 07</h3><p class="card-desc">Fully completed residential villa with deep basement level.</p></div>
+      <div class="barkea-card" data-type="phase1" data-status="completed" tabindex="0" role="button"><div class="card-image-wrap"><img src="{% static 'images/completed3.jpg' %}" alt="Phase 1 Unit 08"><span class="image-tag image-tag--completed">Completed</span></div><div class="card-meta"><span>Phase 1 • Unit 08 • 3 Floors + Basement</span></div><h3 class="card-title">Phase 1 - Unit 08</h3><p class="card-desc">Fully completed residential villa with deep basement level.</p></div>
+      <div class="barkea-card" data-type="phase1" data-status="completed" tabindex="0" role="button"><div class="card-image-wrap"><img src="{% static 'images/completed4.jpg' %}" alt="Phase 1 Unit 09"><span class="image-tag image-tag--completed">Completed</span></div><div class="card-meta"><span>Phase 1 • Unit 09 • 3 Floors + Basement</span></div><h3 class="card-title">Phase 1 - Unit 09</h3><p class="card-desc">Fully completed residential villa with deep basement level.</p></div>
+      <div class="barkea-card" data-type="phase1" data-status="completed" tabindex="0" role="button"><div class="card-image-wrap"><img src="{% static 'images/completed5.jpg' %}" alt="Phase 1 Unit 10"><span class="image-tag image-tag--completed">Completed</span></div><div class="card-meta"><span>Phase 1 • Unit 10 • 3 Floors + Basement</span></div><h3 class="card-title">Phase 1 - Unit 10</h3><p class="card-desc">Fully completed residential villa with deep basement level.</p></div>
+      <div class="barkea-card" data-type="phase1" data-status="completed" tabindex="0" role="button"><div class="card-image-wrap"><img src="{% static 'images/completed1.jpg' %}" alt="Phase 1 Unit 11"><span class="image-tag image-tag--completed">Completed</span></div><div class="card-meta"><span>Phase 1 • Unit 11 • 3 Floors + Basement</span></div><h3 class="card-title">Phase 1 - Unit 11</h3><p class="card-desc">Fully completed residential villa with deep basement level.</p></div>
+      <div class="barkea-card" data-type="phase1" data-status="completed" tabindex="0" role="button"><div class="card-image-wrap"><img src="{% static 'images/completed2.jpg' %}" alt="Phase 1 Unit 12"><span class="image-tag image-tag--completed">Completed</span></div><div class="card-meta"><span>Phase 1 • Unit 12 • 3 Floors + Basement</span></div><h3 class="card-title">Phase 1 - Unit 12</h3><p class="card-desc">Fully completed residential villa with deep basement level.</p></div>
+      <div class="barkea-card" data-type="phase1" data-status="completed" tabindex="0" role="button"><div class="card-image-wrap"><img src="{% static 'images/completed3.jpg' %}" alt="Phase 1 Unit 13"><span class="image-tag image-tag--completed">Completed</span></div><div class="card-meta"><span>Phase 1 • Unit 13 • 3 Floors + Basement</span></div><h3 class="card-title">Phase 1 - Unit 13</h3><p class="card-desc">Fully completed residential villa with deep basement level.</p></div>
+      <div class="barkea-card" data-type="phase1" data-status="completed" tabindex="0" role="button"><div class="card-image-wrap"><img src="{% static 'images/completed4.jpg' %}" alt="Phase 1 Unit 14"><span class="image-tag image-tag--completed">Completed</span></div><div class="card-meta"><span>Phase 1 • Unit 14 • 3 Floors + Basement</span></div><h3 class="card-title">Phase 1 - Unit 14</h3><p class="card-desc">Fully completed residential villa with deep basement level.</p></div>
+      <div class="barkea-card" data-type="phase1" data-status="completed" tabindex="0" role="button"><div class="card-image-wrap"><img src="{% static 'images/completed5.jpg' %}" alt="Phase 1 Unit 15"><span class="image-tag image-tag--completed">Completed</span></div><div class="card-meta"><span>Phase 1 • Unit 15 • 3 Floors + Basement</span></div><h3 class="card-title">Phase 1 - Unit 15</h3><p class="card-desc">Fully completed residential villa with deep basement level.</p></div>
+
+  </div>
+
+  <!-- VILLA DETAIL MODAL-->
+  <div class="villa-modal" id="villaModal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="villaModalTitle">
+      <div class="villa-modal-overlay" data-close-modal></div>
+      <div class="villa-modal-dialog">
+          <button type="button" class="villa-modal-close" data-close-modal aria-label="Close">&times;</button>
+          <div class="villa-modal-body">
+              <div class="villa-modal-media">
+                  <img id="villaModalImg" alt="">
+                  <span id="villaModalStatus" class="image-tag"></span>
+              </div>
+              <div class="villa-modal-info">
+                  <div class="villa-modal-meta" id="villaModalMeta"></div>
+                  <h3 id="villaModalTitle"></h3>
+                  <p id="villaModalDesc"></p>
+                  <div class="villa-modal-plan">
+                      <span class="villa-modal-plan-label">FLOOR PLAN</span>
+                      <div class="villa-modal-plan-frame">
+                          <img id="villaModalPlan" alt="Floor plan">
+                          <p class="villa-modal-plan-fallback" id="villaModalPlanFallback">Floor plan not available for this unit yet.</p>
+                      </div>
+                  </div>
+                  <a href="{% url 'contact' %}" class="button villa-modal-cta">Enquire about this villa</a>
+              </div>
+          </div>
+      </div>
+  </div>
+    </div>
+{% endblock %}

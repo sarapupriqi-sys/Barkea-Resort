@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contact{% endblock %}
+
+{% block content %}
+    <!-- Contact Us Section -->
+<section id="contact" class="contact-section">
+  <div class="container">
+
+    <div class="contact-header">
+      <span class="subtitle">GET IN TOUCH</span>
+      <h2>Contact us</h2>
+    </div>
+
+    <div class="contact-grid">
+      <div class="contact-form-wrapper">
+        <form action="{% url 'contactmessage-list' %}" method="POST" novalidate>
+          {% csrf_token %}
+          
+          <!-- Emri & Mbiemri -->
+          <div class="form-row">
+            <div class="form-group">
+              <label for="first-name">First name</label>
+              <input type="text" id="first-name" name="first_name" required>
+            </div>
+            <div class="form-group">
+              <label for="last-name">Last name</label>
+              <input type="text" id="last-name" name="last_name" required>
+            </div>
+          </div>
+
+          <!-- Email & Telefoni -->
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone</label>
+              <input type="tel" id="phone" name="phone" required>
+            </div>
+          </div>
+
+          <!-- Shteti -->
+          <div class="form-group full-width">
+            <label for="country">Country</label>
+            <input type="text" id="country" name="country" required>
+          </div>
+
+          <!-- Mesazhi -->
+          <div class="form-group full-width">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+          </div>
+
+          <!-- (Checkboxes) -->
+          <div class="form-checkboxes">
+            <label class="checkbox-container">
+              <input type="checkbox" required>
+              <span class="checkmark"></span>
+              I consent to my data being processed.
+            </label>
+            <label class="checkbox-container">
+              <input type="checkbox">
+              <span class="checkmark"></span>
+              Subscribe me to the newsletter.
+            </label>
+          </div>
+
+          <!-- Butoni Send -->
+          <button type="submit" class="submit-btn">SEND</button>
+
+        </form>
+      </div>
+
+      <!-- Karta e Zeze "Receive the full dossier" -->
+      <div class="contact-info-card">
+        <div class="card-content">
+          <h3>Receive the full dossier</h3>
+          <p>The Barkea Resort brochure — the project, residences and services — straight to your inbox.</p>
+          
+          <a href="{% static 'images/BROSHURE-BARKEA-1.pdf' %}" target="_blank" rel="noopener" download class="brochure-btn">BROCHURE</a>
+
+          <div class="info-divider"></div>
+
+          <div class="info-item">
+            <span class="info-label">EMAIL</span>
+            <span class="info-value">barkealbania@gmail.com</span>
+          </div>
+
+          <div class="info-divider"></div>
+
+          <div class="info-item">
+            <span class="info-label">WHATSAPP</span>
+            <span class="info-value">+355 69 202 8516</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+{% endblock %}

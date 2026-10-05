@@ -1,0 +1,781 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <main>
+        <!-- Homepage -->
+        <section id="homepage">
+            <video src="{% static 'images/hero-video.mp4' %}" autoplay loop muted playsinline></video>
+            <div class="hero-center-content">
+                <h1 class="hero-title">Barkea Resort</h1>
+            </div>
+
+            <div class="hero-bottom-left">
+                <div class="property-group">
+                    <span class="property-main">PROPERTY</span>
+                    <div class="rotating-words-container">
+                        <span class="rotating-word">PARTNERS</span>
+                        <span class="rotating-word">SALES</span>
+                        <span class="rotating-word">OPERATIONS</span>
+                    </div>
+                </div>
+                <div class="residential-estate">RESIDENTIAL ESTATE</div>
+            </div>
+
+            <div class="hero-footer">
+                <div class="discover-text">DISCOVER</div>
+                <div class="arrows-down">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-chevron-double-down" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M1.646 6.646a.5.5 0 0 1 .708 0L8 12.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708" />
+                        <path fill-rule="evenodd"
+                            d="M1.646 2.646a.5.5 0 0 1 .708 0L8 8.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708" />
+                    </svg>
+                </div>
+            </div>
+        </section>
+<!-- Location -->
+        <section id="location" class="location-section">
+            <div class="location-container">
+                <!-- Harta-->
+                <div class="location-map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3661.339267569866!2d19.8724013!3d41.292103!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x13503700393b1d4d%3A0x2e8e92dbc4a621ca!2sBarkea!5e1!3m2!1sen!2s!4v1789385835328!5m2!1sen!2s" 
+                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+                </div>
+                <div class="location-content">
+                    <span class="location-subtitle">LOCATION</span>
+                    <h2>Lunder, Farke — close enough, quiet enough.</h2>
+                    <p class="location-description">
+                        Southeast of Tirana, the Lunder–Farke area has become one of the capital's defining residential
+                        zones: greener and calmer than the centre, with a fast, direct connection back into the city.
+                    </p>
+
+                    <div class="location-features">
+                        <div class="feature-item">
+                            <span class="feature-badge">8 km</span>
+                            <div class="feature-text">
+                                <strong>Driving distance</strong>
+                                <span>to central Tirana</span>
+                            </div>
+                        </div>
+
+                        <div class="feature-item">
+                            <span class="feature-badge">SE</span>
+                            <div class="feature-text">
+                                <strong>Positioned</strong>
+                                <span>in the southeast growth corridor</span>
+                            </div>
+                        </div>
+
+                        <div class="feature-item">
+                            <span class="feature-badge">Low</span>
+                            <div class="feature-text">
+                                <strong>Building density</strong>
+                                <span>relative to central neighbourhoods</span>
+                            </div>
+                        </div>
+
+                        <div class="feature-item">
+                            <span class="feature-badge">High</span>
+                            <div class="feature-text">
+                                <strong>Green cover</strong>
+                                <span>and residential character</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Gallery -->
+        <section id="gallery">
+        <div class="gallery-container">
+            <div class="gallery-header">
+                <span class="gallery-tag">GALLERY</span>
+                <h2 class="gallery-title">The project in images</h2>
+            </div>
+            <div class="swipe-hint" aria-hidden="true">
+                <span class="swipe-hint-text">SWIPE TO EXPLORE</span>
+                <span class="swipe-hint-arrow"></span>
+            </div>
+            <!-- Scroll horizontal -->
+            <div class="gallery-scroll-wrapper">
+                <div class="gallery-track">
+                    
+    <!-- Gallery Cards -->
+                    <div class="gallery-card">
+                        <div class="image-wrapper">
+                            <img src="{% static 'images/projekt1.jpg' %}" alt="Kitchen and material detail">
+                        </div>
+                    </div>
+
+                    <div class="gallery-card">
+                        <div class="image-wrapper">
+                            <img src="{% static 'images/projekt2.jpg' %}" alt="Living space and comfort">
+                        </div>
+                    </div>
+
+                    <div class="gallery-card">
+                        <div class="image-wrapper">
+                            <img src="{% static 'images/projekt3.jpg' %}" alt="Villa and garden, lagoon view">
+                        </div>
+                    </div>
+                    <div class="gallery-card">
+                        <div class="image-wrapper">
+                            <img src="{% static 'images/projekt4.jpg' %}" alt="Living space and comfort">
+                        </div>
+                    </div>
+
+                    <div class="gallery-card">
+                        <div class="image-wrapper">
+                            <img src="{% static 'images/projekt5.jpg' %}" alt="Living space and comfort">
+                        </div>
+                    </div>
+
+                    <div class="gallery-card">
+                        <div class="image-wrapper">
+                            <img src="{% static 'images/projekt6.jpg' %}" alt="Living space and comfort">
+                        </div>
+                    </div>
+
+                    <div class="gallery-card">
+                        <div class="image-wrapper">
+                            <img src="{% static 'images/projekt7.jpg' %}" alt="Living space and comfort">
+                        </div>
+                    </div>
+
+                    <div class="gallery-card">
+                        <div class="image-wrapper">
+                            <img src="{% static 'images/projekt8.jpg' %}" alt="Living space and comfort">
+                        </div>
+                    </div>
+
+                    <div class="gallery-card">
+                        <div class="image-wrapper">
+                            <img src="{% static 'images/projekt9.jpg' %}" alt="Living space and comfort">
+                        </div>
+                    </div>
+
+                    <div class="gallery-card">
+                        <div class="image-wrapper">
+                            <img src="{% static 'images/projekt10.jpg' %}" alt="Living space and comfort">
+                        </div>
+                    </div>
+
+                    <div class="gallery-card">
+                        <div class="image-wrapper">
+                            <img src="{% static 'images/projekt11.jpg' %}" alt="Living space and comfort">
+                        </div>
+                    </div>
+
+                    <div class="gallery-card">
+                        <div class="image-wrapper">
+                            <img src="{% static 'images/projekt12.jpg' %}" alt="Living space and comfort">
+                        </div>
+                    </div>
+
+                    <div class="gallery-card">
+                        <div class="image-wrapper">
+                            <img src="{% static 'images/projekt13.jpg' %}" alt="Living space and comfort">
+                        </div>
+                    </div>
+
+                    <div class="gallery-card">
+                        <div class="image-wrapper">
+                            <img src="{% static 'images/projekt14.jpeg' %}" alt="Living space and comfort">
+                        </div>
+                    </div>
+
+                    <div class="gallery-card">
+                        <div class="image-wrapper">
+                            <img src="{% static 'images/projekt15.jpg' %}" alt="Living space and comfort">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- concept -->
+        <section id="concept" class="concept-section">
+            <div class="concept-container">
+                <div class="concept-header">
+                    <span class="section-tag">The Concept</span>
+                    <h2>A new standard of luxury living</h2>
+                    <p class="section-desc">
+                        Barkea Resort redefines elegance by harmonizing with the serene natural beauty of Farka.
+                        Every detail is crafted to offer a lifestyle of absolute privacy, comfort, and sophistication.
+                    </p>
+                </div>
+                <div class="concept-grid">
+                    <div class="concept-text-col">
+                        <h3>A residential complex built around a single idea: <br>
+                            <span class="proximity">proximity without density.</span>
+                        </h3>
+                        <p>Our villas are thoughtfully designed to maximize natural light and seamless indoor-outdoor
+                            living. Positioned perfectly along the terrain, each residence guarantees panoramic views,
+                            total independence, and a deep connection with the surrounding landscape.</p>
+                    </div>
+
+                    <div class="concept-box-col">
+                        <div class="concept-image-wrapper">
+                            <img src="{% static 'images/concept-img.jpg' %}" alt="Barkea Resort Villas Concept" class="concept-image">
+                        </div>
+                        <div class="image-quote-box">
+                            <p class="quote-text">“A place to live first, an investment second.”</p>
+                            <span class="quote-author">— Barkea Resort —</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+<!-- Pjesa me masterplan -->
+   <section id="resort-complex">
+     <div class="resort-container">
+        <div class="section-header">THE RESORT COMPLEX</div>
+        <h2>Six rows, thirty-seven villas.</h2>
+        <p class="description">
+            The complex is organised into six linear rows of villas. Each row follows the same architectural
+            principles — massing, materials, roof lines — while individual plots, verandas and outdoor areas
+            vary by position and typology.
+        </p>
+        <div class="action-wrapper">
+            <a href="{% url 'masterplan_3d' %}" target="_blank" rel="noopener" class="btn-3d">click to see...</a>
+        </div>
+        <div id="masterplan-container">
+        <iframe src="{% url 'masterplan_3d' %}" title="Barkea Resort 3D masterplan" width="100%" height="500px" style="border:none;" allowfullscreen></iframe>
+        </div>
+    </div>
+   </section>
+<!-- Villas -->
+<section id="villas" class="villas-section">
+    <div class="villas-container">
+        <div class="section-header">
+            <h2>Villas & Categories</h2>
+        </div>
+        <div class="villas-grid">
+            
+            <!-- VILA A -->
+            <div class="villa-card">
+                <div class="slider-container" data-slider>
+                    <div class="slides">
+                        <img src="{% static 'images/vilaa1.png' %}" alt="Villa A" class="slide active">
+                        <img src="{% static 'images/vilaa2.png' %}" alt="Villa A Interior" class="slide">
+                    </div>
+                    <button class="slider-btn prev" onclick="moveSlide(this, -1)">&#10094;</button>
+                    <button class="slider-btn next" onclick="moveSlide(this, 1)">&#10095;</button>
+                    <div class="slide-counter">1 / 2</div>
+                </div>
+                <div class="villa-content">
+                    <h3>Villa A</h3>
+                    <p class="villa-subtitle">Exclusive residences blending modern comfort with nature.</p>
+                    <div class="specs-grid">
+                        <div class="spec-item">
+                            <span class="spec-label">INTERIOR SURFACE</span>
+                            <span class="spec-value">206 – 277 m²</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">LAND AREA</span>
+                            <span class="spec-value">400 – 588 m²</span>
+                        </div>
+                    </div>
+                    <p class="villa-description">
+                        Available in 2 or 3-story layouts (A1-A8) featuring optimized modern interiors, private pool, storage, and outdoor entertainment areas.
+                    </p>
+                    <div class="card-footer">
+                        <a href="{% url 'villas' %}" class="all-villas-btn">See more...</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VILA B -->
+            <div class="villa-card">
+                <div class="slider-container" data-slider>
+                    <div class="slides">
+                        <img src="{% static 'images/b3.png' %}" alt="Villa B" class="slide active">
+                        <img src="{% static 'images/b2.png' %}" alt="Villa B Interior" class="slide">
+                        <img src="{% static 'images/b1.png' %}" alt="Villa B Interior" class="slide">
+                        <img src="{% static 'images/b4.png' %}" alt="Villa B Interior" class="slide">
+                    </div>
+                    <button class="slider-btn prev" onclick="moveSlide(this, -1)">&#10094;</button>
+                    <button class="slider-btn next" onclick="moveSlide(this, 1)">&#10095;</button>
+                    <div class="slide-counter">1 / 4</div>
+                </div>
+                <div class="villa-content">
+                    <h3>Villa B</h3>
+                    <p class="villa-subtitle">Spacious luxury residences designed for ultimate comfort.</p>
+                    <div class="specs-grid">
+                        <div class="spec-item">
+                            <span class="spec-label">INTERIOR SURFACE</span>
+                            <span class="spec-value">426 – 475 m²</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">LAND AREA</span>
+                            <span class="spec-value">654 – 877 m²</span>
+                        </div>
+                    </div>
+                    <p class="villa-description">
+                        Offering 3 to 4-story layouts (B1-B7) with large private plots, professional modern design, private pool, and outdoor amenities.
+                    </p>
+                    <div class="card-footer">
+                        <a href="{% url 'villas' %}" class="all-villas-btn">See more...</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VILA C -->
+            <div class="villa-card">
+                <div class="slider-container" data-slider>
+                    <div class="slides">
+                        <img src="{% static 'images/c1.png' %}" alt="Villa C" class="slide active">
+                        <img src="{% static 'images/c2.png' %}" alt="Villa C Interior" class="slide">
+                        <img src="{% static 'images/c3.png' %}" alt="Villa C Interior" class="slide">
+                    </div>
+                    <button class="slider-btn prev" onclick="moveSlide(this, -1)">&#10094;</button>
+                    <button class="slider-btn next" onclick="moveSlide(this, 1)">&#10095;</button>
+                    <div class="slide-counter">1 / 3</div>
+                </div>
+                <div class="villa-content">
+                    <h3>Villa C</h3>
+                    <p class="villa-subtitle">Modern architecture with panoramic views and refined luxury.</p>
+                    <div class="specs-grid">
+                        <div class="spec-item">
+                            <span class="spec-label">INTERIOR SURFACE</span>
+                            <span class="spec-value">440 m²</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">LAND AREA</span>
+                            <span class="spec-value">470 – 830 m²</span>
+                        </div>
+                    </div>
+                    <p class="villa-description">
+                        3-story structures (C1-C7) featuring specialized top-floor layouts with panoramic verandas overlooking the entire complex, plus private pool and leisure spaces.
+                    </p>
+                    <div class="card-footer">
+                        <a href="{% url 'villas' %}" class="all-villas-btn">See more...</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CUSTOM VILLA -->
+            <div class="villa-card">
+                <div class="slider-container" data-slider>
+                    <div class="slides">
+                        <img src="{% static 'images/vila1.png' %}" alt="Custom Villa" class="slide active">
+                        <img src="{% static 'images/vila2.png' %}" alt="Custom Villa Interior" class="slide">
+                    </div>
+                    <button class="slider-btn prev" onclick="moveSlide(this, -1)">&#10094;</button>
+                    <button class="slider-btn next" onclick="moveSlide(this, 1)">&#10095;</button>
+                    <div class="slide-counter">1 / 2</div>
+                </div>
+                <div class="villa-content">
+                    <h3>Custom Villa</h3>
+                    <p class="villa-subtitle">Customizable luxury residences with tailored ad hoc layouts.</p>
+                    <div class="specs-grid">
+                        <div class="spec-item">
+                            <span class="spec-label">INTERIOR SURFACE</span>
+                            <span class="spec-value">390 – 510 m²</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">LAND AREA</span>
+                            <span class="spec-value">360 – 660 m²</span>
+                        </div>
+                    </div>
+                    <p class="villa-description">
+                        Featuring 3 floors and 1 underground level with private verandas and individual parking. Designed with a unified architectural style while allowing clients to customize spaces ad hoc.
+                    </p>
+                    <div class="card-footer">
+                        <a href="{% url 'villas' %}" class="all-villas-btn">See more...</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- Architecture -->
+  <section id="architecture" class="architecture-section">
+    <div class="architecture-container">
+        
+        <div class="section-header">
+            <h2>Architecture & Masterplan</h2>
+            <p class="section-subtitle">A harmonious blend of form, function, and nature.</p>
+        </div>
+
+        <div class="arch-grid">
+            <div class="arch-content">
+                <span class="arch-tag">MASTERPLAN CONCEPT</span>
+                <h3>Integrated Terrain & Smart Zoning</h3>
+                <p>
+                    The architectural masterplan is carefully designed to follow the natural topography of the land. 
+                    Every villa position is optimized to guarantee maximum privacy, unobstructed panoramic views, 
+                    and seamless connection with lush green environments and recreational zones.
+                </p>
+                <ul class="arch-features-list">
+                    <li>Optimal sun orientation for every residence</li>
+                    <li>Private access roads and dedicated parking zones</li>
+                    <li>Extensive green corridors and community spaces</li>
+                </ul>
+            </div>
+            <div class="arch-image-wrapper" role="button" tabindex="0" aria-label="Click to see larger image" onclick="openLightbox(this.querySelector('img').src)">
+                <img src="{% static 'images/plani.png' %}" alt="Masterplan Architecture" class="arch-img">
+                <div class="zoom-hint">CLICK TO SEE LARGER</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div id="lightboxModal" class="lightbox-modal" onclick="closeLightbox()">
+    <span class="lightbox-close">&times;</span>
+    <img class="lightbox-content" id="lightboxImg" alt="Masterplan Architecture (enlarged)">
+</div>
+
+<!-- Why barkea? -->
+    <section id="why-barkea">
+        <div class="why-container">
+            <div class="why-header">
+                <span class="why-tag">ON SITE</span>
+                <h2 class="why-title">Why Barkea Resort</h2>
+            </div>
+
+            <div class="why-content-wrapper">
+                
+                <!--  scroll vertikal -->
+                <div class="why-scroll-wrapper" id="scrollWrapper">
+                    <div class="why-track">
+                        
+                        <!-- Item 1 -->
+                        <div class="why-card" data-index="0">
+                            <div class="image-wrapper">
+                                <img src="{% static 'images/why1.png' %}" alt="Privileged Location">
+                            </div>
+                        </div>
+
+                        <!-- Item 2 -->
+                        <div class="why-card" data-index="1">
+                            <div class="image-wrapper">
+                                <img src="{% static 'images/why2.png' %}" alt="Privacy & Greenery">
+                            </div>
+                        </div>
+
+                        <!-- Item 3 -->
+                        <div class="why-card" data-index="2">
+                            <div class="image-wrapper">
+                                <img src="{% static 'images/why3.jpg' %}" alt="Exclusive Design">
+                            </div>
+                        </div>
+
+                        <!-- Item 4 -->
+                        <div class="why-card" data-index="3">
+                            <div class="image-wrapper">
+                                <img src="{% static 'images/why4.png' %}" alt="Ad Hoc Flexibility">
+                            </div>
+                        </div>
+
+                        <!-- Item 5 -->
+                        <div class="why-card" data-index="4">
+                            <div class="image-wrapper">
+                                <img src="{% static 'images/why5.jpg' %}" alt="Secure Investment">
+                            </div>
+                        </div>
+
+                        <!-- Item 6-->
+                        <div class="why-card" data-index="5">
+                            <div class="image-wrapper">
+                                <img src="{% static 'images/why6.png' %}" alt="Private Pools">
+                            </div>
+                        </div>
+
+                        <!-- Item 7 -->
+                        <div class="why-card" data-index="6">
+                            <div class="image-wrapper">
+                                <img src="{% static 'images/why7.png' %}" alt="Recreation & Leisure">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="why-text-area">
+                    <div class="text-slide active" data-index="0">
+                        <span class="text-number">01</span>
+                        <h3 class="text-heading">Privileged Location</h3>
+                        <p class="text-desc">Just 8 km from Tirana in a peaceful, well-connected green zone.</p>
+                    </div>
+
+                    <div class="text-slide" data-index="1">
+                        <span class="text-number">02</span>
+                        <h3 class="text-heading">Privacy & Greenery</h3>
+                        <p class="text-desc">Only 37 private villas with large plots for absolute privacy.</p>
+                    </div>
+
+                    <div class="text-slide" data-index="2">
+                        <span class="text-number">03</span>
+                        <h3 class="text-heading">Exclusive Design</h3>
+                        <p class="text-desc">Modern architecture featuring large glass facades and top standards.</p>
+                    </div>
+
+                    <div class="text-slide" data-index="3">
+                        <span class="text-number">04</span>
+                        <h3 class="text-heading">Ad Hoc Flexibility</h3>
+                        <p class="text-desc">Fully customizable interiors tailored to your preferences.</p>
+                    </div>
+
+                    <div class="text-slide" data-index="4">
+                        <span class="text-number">05</span>
+                        <h3 class="text-heading">Secure Investment</h3>
+                        <p class="text-desc">An elite area guaranteeing strong long-term property value growth.</p>
+                    </div>
+
+                    <div class="text-slide" data-index="5">
+                        <span class="text-number">06</span>
+                        <h3 class="text-heading">Private Pools</h3>
+                        <p class="text-desc">Spacious private yards designed for your own swimming pool.</p>
+                    </div>
+
+                    <div class="text-slide" data-index="6">
+                        <span class="text-number">07</span>
+                        <h3 class="text-heading">Recreation & Leisure</h3>
+                        <p class="text-desc">Safe, gated community with 24/7 security and scenic walkways.</p>
+                    </div>
+
+                    <div class="scroll-hint" aria-hidden="true">
+                        <span class="scroll-hint-arrow"></span>
+                        <span class="scroll-hint-text">SCROLL TO EXPLORE</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+     <!--  The Developer -->
+ <section id="developer" class="concierge-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="subtitle">The developer</span>
+      <h2>Barkea Resort — Dijon Albania</h2>
+      <div class="developer-intro">
+        <p><strong>Dijon Albania</strong> is the developer of Barkea Resort — the company behind the project.</p>
+        <p>The circle maps the phases of the project: site selection and master planning, underground engineering and infrastructure, structural construction, insulation and exterior facades, and landscaping, private pools and handover — with owner support, ad hoc client consultation and post-handover support alongside.The project has progressed through these phases: on the Villas page, the 15 Phase 1 units are marked Completed and the 22 villas of the A, B and C series In Progress — 37 villas in total. Select a phase in the circle to see what it covers.
+      </div>
+    </div>
+
+    <div class="concierge-grid">
+      
+      <div class="concierge-left">
+        <div class="image-card" id="infoCard">
+        <img id="dynamicImage" src="{% static 'images/barkea-icon.png' %}" alt="Barkea Resort Progress">
+        <img id="dynamicImage" src="{% static 'images/dev.jpg' %}" alt="Barkea Resort Progress">
+        <img id="dynamicImage" src="{% static 'images/plani.png' %}" alt="Barkea Resort Progress">
+        <img id="dynamicImage" src="{% static 'images/dev2.png' %}" alt="Barkea Resort Progress">
+        <img id="dynamicImage" src="{% static 'images/dev3.jpeg' %}" alt="Barkea Resort Progress">
+        <img id="dynamicImage" src="{% static 'images/dev4.jpeg' %}" alt="Barkea Resort Progress">
+        <img id="dynamicImage" src="{% static 'images/dev5.jpg' %}" alt="Barkea Resort Progress">
+        <img id="dynamicImage" src="{% static 'images/dev6.png' %}" alt="Barkea Resort Progress">
+        <img id="dynamicImage" src="{% static 'images/dev8.jpeg' %}" alt="Barkea Resort Progress">
+          <div class="image-overlay-text">
+            <span class="tag" id="dynamicTag">CONCIERGE</span>
+            <h3 id="dynamicTitle">Owner support</h3>
+            <p id="dynamicDesc">A dedicated contact who knows your residence at Barkea and follows you over time.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="concierge-right">
+        <div class="circle-diagram">
+          <!-- Qendra e Rrethit -->
+          <div class="center-circle">
+            <img src="{% static 'images/barkea-icon.png' %}" alt="Barkea Resort">
+            <span>Barkea Resort</span>
+          </div>
+
+          <div class="service-node node-1 active" data-index="0"
+               data-img="{% static 'images/dev.jpg' %}"
+               data-tag="CONCIERGE"
+               data-title="Owner support"
+               data-desc="A dedicated contact who knows your residence at Barkea and follows you over time.">
+               <span>Owner Support</span>
+          </div>
+
+          <div class="service-node node-2" data-index="1"
+               data-img="{% static 'images/plani.png' %}"
+               data-tag="PLANNING"
+               data-title="Site Selection & Master Planning"
+               data-desc="Strategic placement and architectural blueprint design managed by Dijon & team.">
+               <span>Site Selection & Master Planning</span>
+          </div>
+
+          <div class="service-node node-3" data-index="2"
+               data-img="{% static 'images/dev2.png' %}"
+               data-tag="INFRASTRUCTURE"
+               data-title="Underground Engineering"
+               data-desc="Full-scale utility networks, drainage, and foundational infrastructure setup.">
+               <span>Underground Engineering & Infrastructure</span>
+          </div>
+
+          <div class="service-node node-4" data-index="3"
+               data-img="{% static 'images/dev3.jpeg' %}"
+               data-tag="CONSTRUCTION"
+               data-title="Structural Construction"
+               data-desc="Robust framework building and heavy masonry works across all resort zones.">
+               <span>Structural Construction</span>
+          </div>
+
+          <div class="service-node node-5" data-index="4"
+               data-img="{% static 'images/dev4.jpeg' %}"
+               data-tag="CONSULTATION"
+               data-title="Ad Hoc Consultation"
+               data-desc="Tailored architectural adjustments and personal consultations for property owners.">
+               <span>"Ad Hoc" Client Consultation</span>
+          </div>
+
+          <div class="service-node node-6" data-index="5"
+               data-img="{% static 'images/dev5.jpg' %}"
+               data-tag="EXTERIOR"
+               data-title="Insulation & Facades"
+               data-desc="High-grade thermal insulation, exterior styling, and architectural facades.">
+               <span>Insulation and Exterior Facades</span>
+          </div>
+
+          <div class="service-node node-7" data-index="6"
+               data-img="{% static 'images/dev6.png' %}"
+               data-tag="LANDSCAPE"
+               data-title="Landscaping & Pools"
+               data-desc="Creating lush outdoor environments, private pools, and final pathways.">
+               <span>Landscaping, Private Pools, & Handover</span>
+          </div>
+
+          <div class="service-node node-8" data-index="7"
+               data-img="{% static 'images/dev8.jpeg' %}"
+               data-tag="SUPPORT"
+               data-title="Post-Handover Support"
+               data-desc="Continuous maintenance, property management, and ongoing assistance after moving in.">
+               <span>Post-Handover Support</span>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="progress-video">
+      <div class="section-header">
+        <span class="subtitle">Construction progress</span>
+        <h2>15 of 37 villas completed</h2>
+      </div>
+      <video muted autoplay src="{% static 'images/construction-progress.mp4' %}"></video>
+    </div>
+  </div>
+</section>
+<!--  Contact Us Section -->
+<section id="contact" class="contact-section">
+  <div class="container">
+
+    <div class="contact-header">
+      <span class="subtitle">GET IN TOUCH</span>
+      <h2>Contact us</h2>
+    </div>
+
+    <div class="contact-grid">
+      <div class="contact-form-wrapper">
+        <form action="{% url 'contactmessage-list' %}" method="POST" novalidate>
+          {% csrf_token %}
+          
+          <!-- Emri & Mbiemri -->
+          <div class="form-row">
+            <div class="form-group">
+              <label for="first-name">First name</label>
+              <input type="text" id="first-name" name="first_name" required>
+            </div>
+            <div class="form-group">
+              <label for="last-name">Last name</label>
+              <input type="text" id="last-name" name="last_name" required>
+            </div>
+          </div>
+
+          <!-- Email & Telefoni -->
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone</label>
+              <input type="tel" id="phone" name="phone" required>
+            </div>
+          </div>
+
+          <!-- Shteti -->
+          <div class="form-group full-width">
+            <label for="country">Country</label>
+            <input type="text" id="country" name="country" required>
+          </div>
+
+          <!-- Mesazhi -->
+          <div class="form-group full-width">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+          </div>
+
+          <!-- (Checkboxes) -->
+          <div class="form-checkboxes">
+            <label class="checkbox-container">
+              <input type="checkbox" required>
+              <span class="checkmark"></span>
+              I consent to my data being processed.
+            </label>
+            <label class="checkbox-container">
+              <input type="checkbox">
+              <span class="checkmark"></span>
+              Subscribe me to the newsletter.
+            </label>
+          </div>
+
+          <!-- Butoni Send -->
+          <button type="submit" class="submit-btn">SEND</button>
+
+        </form>
+      </div>
+
+      <div class="contact-info-card">
+        <div class="card-content">
+          <h3>Receive the full dossier</h3>
+          <p>The Barkea Resort brochure — the project, residences and services — straight to your inbox.</p>
+          
+          <a href="{% static 'images/BROSHURE-BARKEA-1.pdf' %}" target="_blank" rel="noopener" download class="brochure-btn">BROCHURE</a>
+
+          <div class="info-divider"></div>
+
+          <div class="info-item">
+            <span class="info-label">EMAIL</span>
+            <span class="info-value">barkealbania@gmail.com</span>
+          </div>
+
+          <div class="info-divider"></div>
+
+          <div class="info-item">
+            <span class="info-label">WHATSAPP</span>
+            <span class="info-value">+355 69 202 8516</span>
+          </div>
+      </div>
+
+    </div>
+  </div>
+  </div>
+</section>
+<!-- Video ne fund -->
+<section class="resort-hero-section">
+    <video autoplay muted loop playsinline class="resort-bg-video">
+    <source src="{% static 'images/footervideo2.mp4' %}" type="video/mp4"></video>
+    <div class="resort-overlay"></div>
+    <div class="resort-content">
+        <p class="resort-subtitle">Resort is much more than an investment.</p>
+        <h2 class="resort-title">It's your move.</h2>
+        <div class="resort-buttons">
+        <a href="{% static 'images/BROSHURE-BARKEA-1.pdf' %}" target="_blank" rel="noopener" download class="resort-btn">BROCHURE</a>
+        <a href="#contact" class="resort-btn">WRITE TO US</a>
+     </div>
+    </div>
+</section>
+    </main>
+{% endblock %}

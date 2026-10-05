@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Legal - Barkea Resort{% endblock %}
+
+{% block content %}
+<main>
+    <section class="info-page">
+        <span class="small-tag">LEGAL</span>
+        <h1>Legal Information</h1>
+        <p>
+            Our legal notices (company details, terms of use and disclosures) are being prepared and will
+            be published here shortly. For any legal or contractual question in the meantime, please
+            contact us directly.
+        </p>
+        <a href="{% url 'contact' %}" class="button">Contact us</a>
+    </section>
+</main>
+{% endblock %}

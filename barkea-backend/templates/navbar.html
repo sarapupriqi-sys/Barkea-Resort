@@ -1,0 +1,60 @@
+{% load static %}
+
+<!-- NAVBAR -->
+<header>
+    <nav class="navbar navbar-expand-lg fixed-top py-3" id="siteNav">
+        <div class="container-fluid px-4">
+
+            <a class="navbar-brand" href="{% url 'home' %}#homepage">
+                <img src="{% static 'images/barkeicon.png' %}" alt="Logo" width="40" height="40" class="d-inline-block align-text-top">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Pjesa e Menuse, Gjuhes dhe Butonit -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+             <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link text-uppercase px-2 small fw-semibold text-white"
+            href="/#concept" data-nav-i18n="concept">The Concept</a></li>
+        <li class="nav-item"><a class="nav-link text-uppercase px-2 small fw-semibold text-white"
+            href="{% url 'villas' %}" data-nav-i18n="villas">Villas</a></li>
+        <li class="nav-item"><a class="nav-link text-uppercase px-2 small fw-semibold text-white"
+            href="{% url 'design' %}" data-nav-i18n="design">Design</a></li>
+        <li class="nav-item"><a class="nav-link text-uppercase px-2 small fw-semibold text-white"
+            href="{% url 'gallery' %}" data-nav-i18n="gallery">Gallery</a></li>
+        <li class="nav-item"><a class="nav-link text-uppercase px-2 small fw-semibold text-white"
+            href="{% url 'contact' %}" data-nav-i18n="contact">Contact</a></li>
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle text-uppercase px-2 small fw-semibold text-white"
+            href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-nav-i18n="more">More</a>
+         <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/#location" data-nav-i18n="location">Location</a></li>
+            <li><a class="dropdown-item" href="/#why-barkea" data-nav-i18n="why">Why BarkeaResort?</a></li>
+         </ul>
+             </li>
+   
+            </ul>
+                <div class="d-flex align-items-center gap-3">
+                    <div class="dropdown lang-switch">
+                        <a class="text-white text-decoration-none dropdown-toggle fw-semibold small" href="#"
+                            role="button" id="langToggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span id="navLangLabel">EN</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item lang-option nav-lang-option" href="#" data-lang="en">EN &mdash; English</a></li>
+                            <li><a class="dropdown-item lang-option nav-lang-option" href="#" data-lang="al">AL &mdash; Shqip</a></li>
+                            <li><a class="dropdown-item lang-option nav-lang-option" href="#" data-lang="it">IT &mdash; Italiano</a></li>
+                        </ul>
+                    </div>
+                    <!-- Brochure-->
+                    <a href="{% static 'images/BROSHURE-BARKEA-1.pdf' %}" target="_blank" rel="noopener" download
+                        class="btn text-uppercase btn-sm px-4 py-2 rounded-0 text-white" data-nav-i18n="brochure"
+                        style="background-color: #a38a6a; border: none;">Brochure</a>
+                </div>
+
+            </div>
+        </div>
+    </nav>
+</header>
